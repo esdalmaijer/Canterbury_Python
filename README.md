@@ -9,7 +9,8 @@ In addition, you can find interactive and static versions of the data handling s
 
 You can view static versions here, or walk through interactive versions via [mybinder.org](https://mybinder.org/v2/gh/esdalmaijer/canterbury_python/master). The latter is highly recommended!
 
-####Sessions
+Sessions
+--------
 
 1. **Introduction to Python.** This did not come with a notebook.
 2. [**Experiment building**](01_experiment) This did not come with a notebook.
