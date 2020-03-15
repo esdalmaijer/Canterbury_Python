@@ -1,0 +1,2054 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{canterbury\_python\_model\_fitting}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Linear regression}\label{linear-regression}
+
+Last session, we looked at correlation to assess whether two variables
+related to each other. Unfortunately, this did not tell us anything
+about the direction of causality: A correlation between variable X and Y
+could mean that X predicts Y, but it could also mean that Y predicts X,
+or even that a third variable predicts both X and Y.
+
+This session's statistical tool allows you to be a bit more explicit
+about your predictions. In a \textbf{regression}, you use one or more
+variables to predict one or more other variables. This doesn't
+automatically mean that regressions tell you about the direction of
+causality, but at least you can use it to get a bit closer.
+
+    \subsection{The basics}\label{the-basics}
+
+We'll start of simple, with a regression in which one variable X
+predicts another variable Y. This is roughly equivalent to a
+correlation. In order to make this a bit more exciting, let's look at
+some real data!
+
+\paragraph{Background to our data}\label{background-to-our-data}
+
+At the Winter Olympics, there is a sport called \emph{speed skating}. If
+you're not from a select few countries, you might not have heard of it.
+It's essentially like running, but then you do it on ice, using special
+skates. In most disciplines, only two skaters compete against each other
+at a time. The times are compared between all athletes afterwards, and
+whoever had the best time wins. One of the more exciting races, is the
+500 meter sprint. All competing athletes are \emph{highly} trained, and
+focus on raw power and technique, as that is all that matters. Right?
+
+Well, perhaps not. Perhaps coincidence or even bias might also play a
+role. You see, the starting procedure in speed skating is like most
+other racing sports. The referee says "Ready?", then waits for a bit,
+and then shoots their starting pistol. The regulations are clear on that
+"bit" of time: It should be 1-1.5 seconds from the moment athletes are
+in position, and hence it's regulated to be random.
+
+Unlike in other racing sports, speed skaters race alone or against a
+single opponent, and times are compared between all skaters afterwards.
+(So the main competitors for the win might not directly face each
+other!) This means that every pair of racers starts with a different
+interval between their "Ready" cue and the starting shot.
+
+Does this matter? In theory, the "Ready" signal could be considered an
+\emph{alerting cue}, and we know from psychological research that the
+time between an alerting cue and a subsequent signal affects how quickly
+people respond to that signal. In practice, an interval of 500 ms
+results in an optimal response time, and longer intervals result in
+higher response times.
+
+Now, obviously, the Winter Olympics are not some psychological
+experiment. These aren't a bunch of students in some dank lab room,
+these are highly trained athletes competing under immense pressure,
+looked on by thousands of spectators in the stadium, and even more
+watching from home through live stream or television. Surely this
+alerting thing will not affect their actual performance?
+
+That sounds like an empirical question!
+
+\paragraph{Loading our data}\label{loading-our-data}
+
+The National Skating Union records not only finish times at 500 meters,
+but also measures athletes' time 100 meters into the race. Both of these
+numbers are freely available. Researchers from the Universities of
+Oxford (UK) and Utrecht (Netherlands) have collected data on the
+intervals between the onset of the "Ready" signal and the onset of the
+starting shot. The attached file,
+\texttt{speed\_skating\_all\_races.csv}, has both the 100 and 500 meter
+times, and the ready-start intervals. In addition, there is a column
+that indicates whether an athlete fell or stumbled during a race.
+
+You can load those data into Python using NumPy's \texttt{loadtxt}
+function:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{pyplot}
+        
+        \PY{c+c1}{\PYZsh{} Load the data from all individual races.}
+        \PY{n}{data} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{speed\PYZus{}skating\PYZus{}all\PYZus{}races.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PYZbs{}
+            \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's do some convenience renaming on the columns in the data file:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Get the ready\PYZhy{}start interval data.}
+        \PY{n}{interval} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} Get the times at 100 and 500 meters.}
+        \PY{n}{time\PYZus{}100m} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{time\PYZus{}500m} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} Get the sex data, which is formatted as a 1 for male and}
+        \PY{c+c1}{\PYZsh{} 0 for female. We can cast this into Booleans: True (1) }
+        \PY{c+c1}{\PYZsh{} or False (0) for the question \PYZdq{}Is this athlete male?\PYZdq{}}
+        \PY{n}{is\PYZus{}male} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} The data on falls is formatted in the same way: 1 for a }
+        \PY{c+c1}{\PYZsh{} fall/stumble, and 0 for a regular race. We can cast this}
+        \PY{c+c1}{\PYZsh{} into Booleans too: True (1) of False (0) for \PYZdq{}Did this}
+        \PY{c+c1}{\PYZsh{} athlete fall?\PYZdq{}}
+        \PY{n}{fall} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{Getting a feel for the
+data}\label{getting-a-feel-for-the-data}
+
+Let's plot the data! Make sure to plot the (near) falls in a different
+colour, so we can see whether they really are different from the normal
+races.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Plot the ready\PYZhy{}start interval on the x\PYZhy{}axis, and the 500}
+        \PY{c+c1}{\PYZsh{} meter times on the y\PYZhy{}axis.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval}\PY{p}{[}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{]}\PY{p}{,} \PY{n}{time\PYZus{}500m}\PY{p}{[}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{]}\PY{p}{,} \PYZbs{}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}FF69B4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Also plot the races in which athletes fell or stumbled.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval}\PY{p}{[}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{]}\PY{p}{,} \PY{n}{time\PYZus{}500m}\PY{p}{[}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{]}\PY{p}{,} \PYZbs{}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}006900}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Add axis labels to make the plot clearer.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ready\PYZhy{}start interval (sec)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Finish time (sec)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} Text(0,0.5,u'Finish time (sec)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    So the first thing you see is that there are two REALLY slow races, both
+due to falls. Let's set a limit on the y-axis that will allow us to
+actually see the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Plot the ready\PYZhy{}start interval on the x\PYZhy{}axis, and the}
+        \PY{c+c1}{\PYZsh{} 500 meter times on the y\PYZhy{}axis.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval}\PY{p}{[}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{]}\PY{p}{,} \PY{n}{time\PYZus{}500m}\PY{p}{[}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{]}\PY{p}{,} \PYZbs{}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}FF69B4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Also plot the races in which athletes fell or stumbled.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval}\PY{p}{[}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{]}\PY{p}{,} \PY{n}{time\PYZus{}500m}\PY{p}{[}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{]}\PY{p}{,} \PYZbs{}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}006900}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Add axis labels to make the plot clearer.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ready\PYZhy{}start interval (sec)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Finish time (sec)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Set the axis limit.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{34}\PY{p}{,} \PY{l+m+mi}{41}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} (34, 41)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It's quite clear there are two separate sub-groups in the data here...
+Let's see whether that corresponds with sex:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} MALE}
+        \PY{c+c1}{\PYZsh{} Plot the ready\PYZhy{}start interval on the x\PYZhy{}axis, and the 500}
+        \PY{c+c1}{\PYZsh{} meter times on the y\PYZhy{}axis.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval}\PY{p}{[}\PY{p}{(}\PY{n}{is\PYZus{}male} \PY{o}{==} \PY{n+nb+bp}{True}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PYZbs{}
+            \PY{n}{time\PYZus{}500m}\PY{p}{[}\PY{p}{(}\PY{n}{is\PYZus{}male} \PY{o}{==} \PY{n+nb+bp}{True}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+            \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}4e9a06}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Men}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Also plot the races in which athletes fell or stumbled.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval}\PY{p}{[}\PY{p}{(}\PY{n}{is\PYZus{}male} \PY{o}{==} \PY{n+nb+bp}{True}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PYZbs{}
+            \PY{n}{time\PYZus{}500m}\PY{p}{[}\PY{p}{(}\PY{n}{is\PYZus{}male} \PY{o}{==} \PY{n+nb+bp}{True}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+            \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}8ae234}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} FEMALE}
+        \PY{c+c1}{\PYZsh{} Plot the ready\PYZhy{}start interval on the x\PYZhy{}axis, and the 500 }
+        \PY{c+c1}{\PYZsh{} meter times on the y\PYZhy{}axis.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval}\PY{p}{[}\PY{p}{(}\PY{n}{is\PYZus{}male} \PY{o}{==} \PY{n+nb+bp}{False}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PYZbs{}
+            \PY{n}{time\PYZus{}500m}\PY{p}{[}\PY{p}{(}\PY{n}{is\PYZus{}male} \PY{o}{==} \PY{n+nb+bp}{False}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+            \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}c4a000}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Women}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Also plot the races in which athletes fell or stumbled.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval}\PY{p}{[}\PY{p}{(}\PY{n}{is\PYZus{}male} \PY{o}{==} \PY{n+nb+bp}{False}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PYZbs{}
+            \PY{n}{time\PYZus{}500m}\PY{p}{[}\PY{p}{(}\PY{n}{is\PYZus{}male} \PY{o}{==} \PY{n+nb+bp}{False}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+            \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}fce94f}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Add axis labels to make the plot clearer.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ready\PYZhy{}start interval (sec)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Finish time (sec)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Set the axis limit.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{34}\PY{p}{,} \PY{l+m+mi}{41}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Add a legend.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lower right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} <matplotlib.legend.Legend at 0x7fa6926aa890>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It seems that on average, men were about 4 seconds quicker than women.
+That means we can't just compute a Pearson correlation on the entire
+dataset as one group: Clearly there are two separate underlying
+distributions. However, we don't really care about the difference
+between men and women here. Instead, we're only interested in whether or
+not there is an effect of ready-start interval on finish times.
+
+In order to look at this, we could z-score the data within each group.
+This subtracts the group mean from every sample, and then divides it by
+the group standard deviation. The z-scored finish times for men and
+women should both have a mean of 0 and a standard deviation of 1, making
+the two groups directly comparable. (And, more importantly, combinable!)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{scipy.stats} \PY{k+kn}{import} \PY{n}{zscore}
+        
+        \PY{c+c1}{\PYZsh{} Compute the z\PYZhy{}scored finish times.}
+        \PY{n}{z\PYZus{}time\PYZus{}500m\PYZus{}male} \PY{o}{=} \PYZbs{}
+            \PY{n}{zscore}\PY{p}{(}\PY{n}{time\PYZus{}500m}\PY{p}{[}\PY{p}{(}\PY{n}{is\PYZus{}male}\PY{o}{==}\PY{n+nb+bp}{True}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{n}{z\PYZus{}time\PYZus{}500m\PYZus{}female} \PY{o}{=} \PYZbs{}
+            \PY{n}{zscore}\PY{p}{(}\PY{n}{time\PYZus{}500m}\PY{p}{[}\PY{p}{(}\PY{n}{is\PYZus{}male}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Combine the two vectors into one.}
+        \PY{n}{z\PYZus{}time\PYZus{}500m} \PY{o}{=} \PYZbs{}
+            \PY{n}{numpy}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{[}\PY{n}{z\PYZus{}time\PYZus{}500m\PYZus{}male}\PY{p}{,} \PY{n}{z\PYZus{}time\PYZus{}500m\PYZus{}female}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Import the Pearson correlation function.}
+        \PY{k+kn}{from} \PY{n+nn}{scipy.stats} \PY{k+kn}{import} \PY{n}{pearsonr}
+        
+        \PY{c+c1}{\PYZsh{} Compute the correlation between interval and finish time.}
+        \PY{n}{r}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{n}{pearsonr}\PY{p}{(}\PY{n}{interval}\PY{p}{[}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{]}\PY{p}{,} \PY{n}{z\PYZus{}time\PYZus{}500m}\PY{p}{)}
+        
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval}\PY{p}{[}\PY{n}{fall}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{]}\PY{p}{,} \PY{n}{z\PYZus{}time\PYZus{}500m}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        
+        
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R=\PYZob{}\PYZcb{}, p=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{r}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PYZbs{}
+            \PY{n+nb}{round}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+R=0.34, p=0.0
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    OK, so we now know that there is a \emph{statistically} significant
+correlation between ready-start interval and finish time. However, we
+don't know whether this correlation is \emph{practically} significant.
+Ideally, we would like to know exactly how a longer ready-start interval
+affects the finish time. In other words: If the referee waits 1 second
+longer to shoot the starting pistol, how much slower does an athlete
+become?
+
+To answer this question, we can use \emph{regression}.
+
+    \paragraph{Linear regression}\label{linear-regression}
+
+One thing that wasn't mentioned about the 500 meter sprint in speed
+skating, is that athletes race twice. After the first round of races,
+pairs are mixed up, and all athletes race again. Their times of both
+races are combined, and whoever has the lowest summed time wins a gold
+medal.
+
+This is not unlike an experimental manipulation: It sounds a bit like a
+researcher used two trials per participant to estimate the effect of
+ready-start interval on finish time. This is exactly how you can use the
+data!
+
+For our each athlete, you can compute the difference in ready-start
+interval between both races. This will be your \emph{predictor} variable
+\texttt{x}.
+
+You can also compute the difference in finish times between both races.
+This will be your \emph{outcome} variable \texttt{y}.
+
+In a regression, you try to predict the outcome with one or more
+predictors. Or, in an equation:
+
+\(y = \beta_{0} + x_{1} \beta_{1} + \epsilon\)
+
+Where \(y\) is the outcome variable, \(\beta_{0}\) is the intercept
+(what is \(y\) when all \(x\) values are zero?), \(x_{1}\) is the first
+predictor variable, \(\beta_{1}\) is a free variable that determines how
+much \(x_{1}\) affects \(y\), and \(\epsilon\) is the \emph{error term}
+that determines how much was unaccounted for. Sometimes this is called
+\emph{noise}, because it refers to all unpredicted things.
+
+Or, in code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from} \NormalTok{scipy.stats }\ImportTok{import} \NormalTok{linregress}
+\NormalTok{slope, intercept, r_value, p_value, std_err }\OperatorTok{=} \NormalTok{linregress(x, y)}
+\end{Highlighting}
+\end{Shaded}
+
+    First, we need to compute our predictor and outcome: The differences
+between the two races of each athlete in ready-start interval and finish
+time. We can load the data for individual races from the file
+\texttt{speed\_skating\_paired\_races.csv}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{numpy}
+        
+        \PY{c+c1}{\PYZsh{} Load the data from all individual races.}
+        \PY{n}{data} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{speed\PYZus{}skating\PYZus{}paired\PYZus{}races.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PYZbs{}
+            \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PYZbs{}
+            \PY{n}{usecols}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Rename the variables for our convenience.}
+        \PY{n}{interval\PYZus{}1} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{time\PYZus{}100m\PYZus{}1} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{time\PYZus{}500m\PYZus{}1} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{interval\PYZus{}2} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{time\PYZus{}100m\PYZus{}2} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{time\PYZus{}500m\PYZus{}2} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{is\PYZus{}male} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}
+        \PY{n}{exclude} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now we can compute the differences in ready-start interval and finish
+time between the two races. We'll exclude all the athletes who (nearly)
+fell, but we won't separate men and women again. This is because we have
+no reason to assume that alerting effects are any different between men
+and women, and thus our hypothesis should be that \emph{all} athletes
+are affected, regardless of sex.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Compute the interval difference between race 1 and 2.}
+        \PY{n}{interval\PYZus{}d} \PY{o}{=} \PYZbs{}
+            \PY{n}{interval\PYZus{}1}\PY{p}{[}\PY{n}{exclude}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{interval\PYZus{}2}\PY{p}{[}\PY{n}{exclude}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} Compute the finish time difference between race 1 and 2.}
+        \PY{n}{time\PYZus{}500m\PYZus{}d} \PY{o}{=} \PYZbs{}
+            \PY{n}{time\PYZus{}500m\PYZus{}1}\PY{p}{[}\PY{n}{exclude}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{time\PYZus{}500m\PYZus{}2}\PY{p}{[}\PY{n}{exclude}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{]}
+\end{Verbatim}
+
+
+    Let's do a quick check to see what our data looks like:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Plot the values.}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval\PYZus{}d}\PY{p}{,} \PY{n}{time\PYZus{}500m\PYZus{}d}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}FF69B4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Add axis labels.}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ready\PYZhy{}start interval difference (sec)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Finish time difference (sec)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} Text(0,0.5,u'Finish time difference (sec)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In the graph, we can see that ready-start interval differences lie
+between -1 and 1 seconds. We can also see that finish times are quite
+stable within each individual athlete: Most differences are between -0.4
+and 0.4 seconds!
+
+In addition, just by eyeballing the graph, it looks like there might be
+a positive correlation between the ready-start interval difference and
+the finish time difference. Let's quantify this relation by using a
+regression:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{scipy.stats} \PY{k+kn}{import} \PY{n}{linregress}
+         
+         \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{r}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{std\PYZus{}err} \PY{o}{=} \PYZbs{}
+             \PY{n}{linregress}\PY{p}{(}\PY{n}{interval\PYZus{}d}\PY{p}{,} \PY{n}{time\PYZus{}500m\PYZus{}d}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R=\PYZob{}\PYZcb{}, p=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{r}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{slope=}\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{, intercept=}\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+R=0.35, p=0.003
+slope=0.17, intercept=0.03
+
+    \end{Verbatim}
+
+    From the output, we can learn that there is a statistically significant
+correlation with a Pearson R of 0.35. In addition, we now know how to
+quantify the effect:
+
+\(y = 0.03 + 0.17 x_{1}\)
+
+or:
+
+\(\Delta_{finish} = 0.03 + 0.17 \Delta_{interval}\)
+
+In practice, this means that for every second the referee waits between
+"Ready" and the starting shot, they add (on average) 0.17 seconds to an
+atheletes finish time. You can draw this line into your graph:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Select a bunch of x values that will cover the range of}
+         \PY{c+c1}{\PYZsh{} the interval difference data.}
+         \PY{n}{x} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Compute what the predicted y values would be for each}
+         \PY{c+c1}{\PYZsh{} of these values.}
+         \PY{n}{y} \PY{o}{=} \PY{n}{intercept} \PY{o}{+} \PY{n}{slope} \PY{o}{*} \PY{n}{x}
+         
+         \PY{c+c1}{\PYZsh{} Plot the line into a graph.}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}FF69B4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the measured values.}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{interval\PYZus{}d}\PY{p}{,} \PY{n}{time\PYZus{}500m\PYZus{}d}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}FF69B4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PYZbs{}
+             \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add axis labels.}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ready\PYZhy{}start interval difference (sec)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PYZbs{}
+             \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Finish time difference (sec)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} Text(0,0.5,u'Finish time difference (sec)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Is this a problem? Well, at Vancouver in 2010, the total difference
+between gold and silver was 0.16 seconds. It is not uncommen at all for
+speed skaters to get even closer: In 2014, the difference between gold
+and silver was 0.01 seconds, and between gold and bronze it was 0.15. In
+2018, the difference between gold and silver was 0.01 seconds again.
+
+Clearly, the margins are small, and thus this ready-start interval
+effect might have real-life consequences.
+
+    \paragraph{References}\label{references}
+
+If you're interested in the background to the data, you can read the
+following two articles. They're very short, and not very technical:
+
+\begin{itemize}
+\tightlist
+\item
+  Dalmaijer, E.S., Nijenhuis, B.G., \& Van der Stigchel, S. (2015). Life
+  is unfair, and so are racing sports: Some athletes can randomly
+  benefit from alerting effects due to inconsistent starting procedures.
+  Frontiers in Psychology, 6(1618).
+  doi:\href{http://dx.doi.org/10.3389/fpsyg.2015.01618}{10.3389/fpsyg.2015.01618}
+\item
+  Dalmaijer, E.S., Nijenhuis, B.G., \& Van der Stigchel, S. (2016).
+  Commentary: Life is unfair, and so are racing sports: Some athletes
+  can randomly benefit from alerting effects due to inconsistent
+  starting procedures. Frontiers in Psychology, 7(119).
+  doi:\href{http://dx.doi.org/10.3389/fpsyg.2016.00119}{10.3389/fpsyg.2016.00119}
+\end{itemize}
+
+    \subsection{But how does regression
+work?}\label{but-how-does-regression-work}
+
+In regression, you have an explicit \emph{model} for your data.
+Specifically, it says that there is a linear relationship between
+variables \(y\) and \(x\):
+
+\(y = \beta_{0} + x_{1} \beta_{1} + \epsilon\)
+
+You know what the values for \(y\) are, because you measured those. You
+also know what the values for \(x\) are, because you manipulated (or
+measured) those. But how do you know what the \(\beta\) values are? And
+what that \(\epsilon\) is?
+
+One way would be to simply try all possible values of each \(\beta\),
+and see when the resulting line fits best. How do you know what set of
+\(\beta\) values fits best? Simple: It's when the difference between
+your predicted values of \(y\) and your measured values of \(y\) is the
+smallest.
+
+Let's give this approach a go with the skating dataset:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} First, define the ranges along which we need to }
+         \PY{c+c1}{\PYZsh{} search for the best fitting betas.}
+         \PY{n}{b0\PYZus{}range} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{b1\PYZus{}range} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Count the number of values we will try for each beta.}
+         \PY{n}{n\PYZus{}b0} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b0\PYZus{}range}\PY{p}{)}
+         \PY{n}{n\PYZus{}b1} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b1\PYZus{}range}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Second, define some starting values. The first are the}
+         \PY{c+c1}{\PYZsh{} betas, which will be None to start with.}
+         \PY{n}{beta} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{None}\PY{p}{,} \PY{n+nb+bp}{None}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} We also need to start with a difference between the y }
+         \PY{c+c1}{\PYZsh{} values and the predicted y values. This}
+         \PY{c+c1}{\PYZsh{} will start at infinitely high:}
+         \PY{n}{min\PYZus{}s} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{inf}
+         
+         \PY{c+c1}{\PYZsh{} Finally, we loop through every possible combination of }
+         \PY{c+c1}{\PYZsh{} b0 and b1.}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{b0} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{b0\PYZus{}range}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{b1} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{b1\PYZus{}range}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Predict y using the current betas.}
+                 \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{b0} \PY{o}{+} \PY{n}{b1} \PY{o}{*} \PY{n}{interval\PYZus{}d}
+                 \PY{c+c1}{\PYZsh{} Compute the difference between the predicted y }
+                 \PY{c+c1}{\PYZsh{} and the measured y for each observation.}
+                 \PY{n}{d} \PY{o}{=} \PY{n}{time\PYZus{}500m\PYZus{}d} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}
+                 \PY{c+c1}{\PYZsh{} Compute the sum of squares of the differences }
+                 \PY{c+c1}{\PYZsh{} (residuals).}
+                 \PY{n}{s} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{d}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Remember the current betas if the sum of squares}
+                 \PY{c+c1}{\PYZsh{} is lower than the previously lowest.}
+                 \PY{k}{if} \PY{n}{s} \PY{o}{\PYZlt{}} \PY{n}{min\PYZus{}s}\PY{p}{:}
+                     \PY{n}{betas} \PY{o}{=} \PY{p}{(}\PY{n}{b0}\PY{p}{,} \PY{n}{b1}\PY{p}{)}
+                     \PY{n}{min\PYZus{}s} \PY{o}{=} \PY{n}{s}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best fit: b0=\PYZob{}\PYZcb{}, b1=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best fit: b0=0.03, b1=0.17
+
+    \end{Verbatim}
+
+    As you might recall, these are the same values that you obtained through
+using the \texttt{linregress} function earlier!
+
+The reason this works, is because you travelled through \emph{parameter
+space}, and at each point computed the \emph{sum of squares} of the
+difference between the actual and your predicted values. This difference
+is called the \emph{residuals}. You kept track of which point in
+parameter space was associated with the lowest \emph{squared residuals}.
+This is called \emph{least-squares regression}.
+
+You can actually plot parameter space and the associated residual
+squares:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} First, define the ranges along which we need to search }
+         \PY{c+c1}{\PYZsh{} for the best fitting betas.}
+         \PY{n}{b0\PYZus{}range} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{b1\PYZus{}range} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Count the number of values we will try for each beta.}
+         \PY{n}{n\PYZus{}b0} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b0\PYZus{}range}\PY{p}{)}
+         \PY{n}{n\PYZus{}b1} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b1\PYZus{}range}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Second, define some starting values. The first are the}
+         \PY{c+c1}{\PYZsh{} betas, which will be None to start with.}
+         \PY{n}{beta} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{None}\PY{p}{,} \PY{n+nb+bp}{None}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} We also need to start with a difference between the y}
+         \PY{c+c1}{\PYZsh{} values and the predicted y values. This}
+         \PY{c+c1}{\PYZsh{} will start at infinitely high:}
+         \PY{n}{min\PYZus{}s} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{inf}
+         \PY{c+c1}{\PYZsh{} Keep track of the residuals at every point in parameter}
+         \PY{c+c1}{\PYZsh{} space. This starts as a matrix filled with NaN (not a}
+         \PY{c+c1}{\PYZsh{} number), and one value will be added on every iteration.}
+         \PY{n}{s} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}b0}\PY{p}{,}\PY{n}{n\PYZus{}b1}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)} \PY{o}{*} \PY{n}{numpy}\PY{o}{.}\PY{n}{NaN}
+         
+         \PY{c+c1}{\PYZsh{} Finally, we loop through every possible combination of }
+         \PY{c+c1}{\PYZsh{} b0 and b1.}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{b0} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{b0\PYZus{}range}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{b1} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{b1\PYZus{}range}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Predict y using the current betas.}
+                 \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{b0} \PY{o}{+} \PY{n}{b1} \PY{o}{*} \PY{n}{interval\PYZus{}d}
+                 \PY{c+c1}{\PYZsh{} Compute the difference between the predicted y }
+                 \PY{c+c1}{\PYZsh{} and the measured y for each observation.}
+                 \PY{n}{d} \PY{o}{=} \PY{n}{time\PYZus{}500m\PYZus{}d} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}
+                 \PY{c+c1}{\PYZsh{} Compute the sum of squares of the differences}
+                 \PY{c+c1}{\PYZsh{} (residuals).}
+                 \PY{n}{s}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{d}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Remember the current betas if the sum of squares}
+                 \PY{c+c1}{\PYZsh{} is lower than the previously lowest.}
+                 \PY{k}{if} \PY{n}{s}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{min\PYZus{}s}\PY{p}{:}
+                     \PY{n}{betas} \PY{o}{=} \PY{p}{(}\PY{n}{b0}\PY{p}{,} \PY{n}{b1}\PY{p}{)}
+                     \PY{n}{min\PYZus{}s} \PY{o}{=} \PY{n}{s}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best fit: b0=\PYZob{}\PYZcb{}, b1=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Now plot the residual squares in parameter space:}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Set the tick labels on the x and y axes.}
+         \PY{n}{x\PYZus{}ticks} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}b1}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{n\PYZus{}b1}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{x\PYZus{}tick\PYZus{}labels} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{b1\PYZus{}range}\PY{p}{[}\PY{n}{x\PYZus{}ticks}\PY{p}{]}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{x\PYZus{}ticks}\PY{p}{,} \PY{n}{x\PYZus{}tick\PYZus{}labels}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Possible beta 1 values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{y\PYZus{}ticks} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}b0}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{y\PYZus{}tick\PYZus{}labels} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{b0\PYZus{}range}\PY{p}{[}\PY{n}{y\PYZus{}ticks}\PY{p}{]}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{y\PYZus{}ticks}\PY{p}{,} \PY{n}{y\PYZus{}tick\PYZus{}labels}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Possible beta 0 values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Draw an colour bar to show the resulting sums of residual}
+         \PY{c+c1}{\PYZsh{} squares.}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best fit: b0=0.03, b1=0.17
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} <matplotlib.colorbar.Colorbar at 0x7fa688298f10>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From this plot, you can see that the optimal combination of betas is
+close to point (0,0). However, you can also see that we cast a
+\emph{very} wide net. Perhaps it would have been better to choose a
+smaller search space. For example, instead of using ranges \([0,10]\)
+for \(\beta_{0}\) and \([-10,10]\) for \(\beta_{1}\), we could have used
+\([0,0.1]\) and \([0,0.5]\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} First, define the ranges along which we need to }
+         \PY{c+c1}{\PYZsh{} search for the best fitting betas.}
+         \PY{n}{b0\PYZus{}range} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.001}\PY{p}{)}
+         \PY{n}{b1\PYZus{}range} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.001}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Count the number of values we will try for each beta.}
+         \PY{n}{n\PYZus{}b0} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b0\PYZus{}range}\PY{p}{)}
+         \PY{n}{n\PYZus{}b1} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{b1\PYZus{}range}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Second, define some starting values. The first are the}
+         \PY{c+c1}{\PYZsh{} betas, which will be None to start with.}
+         \PY{n}{beta} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{None}\PY{p}{,} \PY{n+nb+bp}{None}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} We also need to start with a difference between the y}
+         \PY{c+c1}{\PYZsh{} values and the predicted y values. This}
+         \PY{c+c1}{\PYZsh{} will start at infinitely high:}
+         \PY{n}{min\PYZus{}s} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{inf}
+         \PY{c+c1}{\PYZsh{} Keep track of the residuals at every point in parameter}
+         \PY{c+c1}{\PYZsh{} space. This starts as a matrix filled with NaN (not a }
+         \PY{c+c1}{\PYZsh{} number), and one value will be added on every iteration.}
+         \PY{n}{s} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}b0}\PY{p}{,}\PY{n}{n\PYZus{}b1}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)} \PY{o}{*} \PY{n}{numpy}\PY{o}{.}\PY{n}{NaN}
+         
+         \PY{c+c1}{\PYZsh{} Finally, we loop through every possible combination of }
+         \PY{c+c1}{\PYZsh{} b0 and b1.}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{b0} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{b0\PYZus{}range}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{b1} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{b1\PYZus{}range}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Predict y using the current betas.}
+                 \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{b0} \PY{o}{+} \PY{n}{b1} \PY{o}{*} \PY{n}{interval\PYZus{}d}
+                 \PY{c+c1}{\PYZsh{} Compute the difference between the predicted y }
+                 \PY{c+c1}{\PYZsh{} and the measured y for each observation.}
+                 \PY{n}{d} \PY{o}{=} \PY{n}{time\PYZus{}500m\PYZus{}d} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}
+                 \PY{c+c1}{\PYZsh{} Compute the sum of squares of the differences }
+                 \PY{c+c1}{\PYZsh{} (residuals).}
+                 \PY{n}{s}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{d}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Remember the current betas if the sum of squares}
+                 \PY{c+c1}{\PYZsh{} is lower than the previously lowest.}
+                 \PY{k}{if} \PY{n}{s}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{min\PYZus{}s}\PY{p}{:}
+                     \PY{n}{betas} \PY{o}{=} \PY{p}{(}\PY{n}{b0}\PY{p}{,} \PY{n}{b1}\PY{p}{)}
+                     \PY{n}{min\PYZus{}s} \PY{o}{=} \PY{n}{s}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best fit: b0=\PYZob{}\PYZcb{}, b1=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Now plot the residual squares in parameter space:}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Set the tick labels on the x and y axes.}
+         \PY{n}{x\PYZus{}ticks} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}b1}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{n\PYZus{}b1}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{x\PYZus{}tick\PYZus{}labels} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{b1\PYZus{}range}\PY{p}{[}\PY{n}{x\PYZus{}ticks}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{x\PYZus{}ticks}\PY{p}{,} \PY{n}{x\PYZus{}tick\PYZus{}labels}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Possible beta 1 values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{y\PYZus{}ticks} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}b0}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{y\PYZus{}tick\PYZus{}labels} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{b0\PYZus{}range}\PY{p}{[}\PY{n}{y\PYZus{}ticks}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{y\PYZus{}ticks}\PY{p}{,} \PY{n}{y\PYZus{}tick\PYZus{}labels}\PY{p}{)}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Possible beta 0 values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Draw an colour bar to show the resulting sums of residual}
+         \PY{c+c1}{\PYZsh{} squares.}
+         \PY{n}{pyplot}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best fit: b0=0.03, b1=0.17
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} <matplotlib.colorbar.Colorbar at 0x7fa68a102410>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Here, it's a lot clearer that the best fitting combination of predictor
+values is around (0.17, 0.03).
+
+    \paragraph{Doing your own least-squares
+regression}\label{doing-your-own-least-squares-regression}
+
+What you just did is a \emph{full space estimate}. The advantage of such
+an approach is that you tried every possible point within a pre-defined
+grid. A significant downside, however, is that it takes ages to
+complete. Especially if you have no clue where your possible \(\beta\)
+values are going to be, and/or if you want a high resolution estimate
+(smaller step sizes between your points), you would have to try a very
+large number of combinations. In addition, if you want to add additional
+predictors, your grid will grow exponentially.
+
+Fortunately, there are \emph{minimisation algorithms}. These will walk
+through parameter space in a clever way. Most work by randomly starting
+at one particular point, computing the residual squares for that
+particular set of \(\beta\) values, and then they try a nearby point to
+compute the residual squares again. By using the slope between these
+points, the algorithm knows where to go: Because the best fitting
+solution is at the point with the lowest residual square, the algorithm
+simply has to follow the slope downwards until it reaches a point where
+it can no longer go down any further. This is the best fit!
+
+Let's try one of these minimisation algorithms. It needs a function to
+minimise the value for (i.e. a function that computes the residual
+squares):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Import the minimize function from SciPy.}
+         \PY{k+kn}{from} \PY{n+nn}{scipy.optimize} \PY{k+kn}{import} \PY{n}{minimize}
+         
+         \PY{c+c1}{\PYZsh{} Define a function to compute the sum of residual }
+         \PY{c+c1}{\PYZsh{} squares based on our model.}
+         \PY{k}{def} \PY{n+nf}{residuals}\PY{p}{(}\PY{n}{betas}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Compute the predicted value of y.}
+             \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{x}
+             \PY{c+c1}{\PYZsh{} Compute the residuals.}
+             \PY{n}{res} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}
+             \PY{c+c1}{\PYZsh{} Compute the sum of squared residuals.}
+             \PY{n}{s} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{res}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Return the squared residuals.}
+             \PY{k}{return} \PY{n}{s}
+         
+         \PY{c+c1}{\PYZsh{} Choose values that the algorithm uses as an initial guess.}
+         \PY{n}{initial\PYZus{}guess} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Use the mimize function to compute the best fit.}
+         \PY{n}{model} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{n}{initial\PYZus{}guess}\PY{p}{,} \PYZbs{}
+             \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{interval\PYZus{}d}\PY{p}{,} \PY{n}{time\PYZus{}500m\PYZus{}d}\PY{p}{)}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L\PYZhy{}BFGS\PYZhy{}B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Report the betas.}
+         \PY{n}{betas} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{x}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best fit: b0=\PYZob{}\PYZcb{}, b1=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best fit: b0=0.03, b1=0.17
+
+    \end{Verbatim}
+
+    This is the same result as the full space estimate provided earlier.
+However, this method is \textbf{much} faster.
+
+You could ask what the benefit of using \texttt{minimize} is over simply
+using \texttt{linregress}. Both functions allowed us to fit our data,
+both gave us the same answer, and both were very quick about it too. The
+neat thing about using the \texttt{minimize} approach is that it is very
+flexible. You could have used \emph{any} model, regardless of how many
+predictors you would have liked. You could even have used a non-linear
+model. Or a different way of computing the "best fit", for example one
+that doesn't rely on residuals.
+
+    \paragraph{How good is a fit?}\label{how-good-is-a-fit}
+
+The one thing we didn't do yet, is computing how good a fit really is.
+The usual measure for this is the \emph{coefficient of determination},
+or \(R^{2}\). This is computed by dividing the sum of squares of the
+residuals by the total sum of squares:
+
+\(R^{2} = 1 - {{SS_{res}} \over {SS_{total}}}\)
+
+Or, more scary-looking, but also more helpful:
+
+\(R^{2} = 1 - { { \Sigma^{n}_{i=1} (y_{i} - f_{i})^{2} } \over { \Sigma^{n}_{i=1}(y_{i} - \bar{y})^{2} }}\)
+
+Where \(n\) is the number of observations, \(\bar{y}\) is the mean of
+\(y\), and \(f_{i}\) is the predicted value of \(y_{i}\) given the
+model. For example:
+
+\(f_{i} = \beta_{0} + \beta_{1} x_{i}\)
+
+Or, in code:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Compute the predicted y values based on the fitted betas.}
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{interval\PYZus{}d}
+         
+         \PY{c+c1}{\PYZsh{} Compute the residual sum of squares.}
+         \PY{n}{ss\PYZus{}res} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{time\PYZus{}500m\PYZus{}d} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Compute the total sum of squares.}
+         \PY{n}{ss\PYZus{}tot} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{time\PYZus{}500m\PYZus{}d} \PY{o}{\PYZhy{}} \PY{n}{numpy}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{time\PYZus{}500m\PYZus{}d}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Compute R square.}
+         \PY{n}{r\PYZus{}sq} \PY{o}{=} \PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{ss\PYZus{}res} \PY{o}{/} \PY{n}{ss\PYZus{}tot}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R squared = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{r\PYZus{}sq}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+R squared = 0.12
+
+    \end{Verbatim}
+
+    If \(R^{2}\) is 1, all variance in outcome \(y\) is predicted by
+predictor \(x\). If \(R^{2}\) is 0, none of the variance in outcome
+\(y\) is explained by predictor \(x\). Here, the ready-start interval
+differences can explain 12\% of the variance in finish time difference.
+
+In the case of high-level sporting events, the amount of variance
+explained by anything other than athlete's ability should ideally be
+0\%. Here, a random variation in pre-start time that is introduced by
+the person holding the starting pistol was 12\%. That's probably not
+ideal.
+
+    \subsection{Multi-variable regression}\label{multi-variable-regression}
+
+Now that you know how to do a regression with a single predictor, we can
+turn to regressions with multiple predictors. The general format of
+multi-variable regression looks very similar to the single-variable
+version:
+
+\(y = \beta_{0} + x_{1} \beta_{1} + ... + x_{n} \beta_{n} + \epsilon\)
+
+Where \(n\) is the number of variables you might have. For example, the
+equation for three predictors would look like this:
+
+\(y = \beta_{0} + x_{1} \beta_{1} + x_{2} \beta_{2} + x_{3} \beta_{3} + \epsilon\)
+
+Here, \(x_{1}\), \(x_{2}\), and \(x_{3}\) are three different
+predictors. \(\beta_{1}\), \(\beta_{2}\), and \(\beta_{3}\) indicate the
+magnitude and direction of the effect of each predictor on \(y\). As
+before, \(\epsilon\) captures the "noise": all variance in \(y\) that we
+could not explain using the predictors.
+
+    \paragraph{Another example dataset}\label{another-example-dataset}
+
+Last session, we looked at a dataset that contained the number of
+minutes each participant listened to Taylor Swift, and their happiness
+ratings. We collected similar data, but now included a measure of IQ
+too. These data can be found in the attached file
+\texttt{taytay\_revisited.csv}.
+
+We can load the dataset using NumPy's \texttt{loadtxt} function:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{import} \PY{n+nn}{numpy}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{pyplot}
+         
+         \PY{c+c1}{\PYZsh{} Load the data.}
+         \PY{n}{data} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{taytay\PYZus{}revisited.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{,} \PYZbs{}
+             \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Create some easy variable names to point to the data.}
+         \PY{n}{tay\PYZus{}minutes} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{happy} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{iq} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Use the two predictors together into a single variable.}
+         \PY{n}{predictors} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{iq}\PY{p}{,} \PY{n}{happy}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Our objective is to predict the number of minutes someone listens to
+Taylor Swift by using their IQ score and happiness rating. Or, in an
+equation:
+
+\(Swifting = \beta_{0} + happiness * \beta_{1} + IQ * \beta_{2} + \epsilon\)
+
+Let's write a function to model this:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{residuals}\PY{p}{(}\PY{n}{betas}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Compute the predicted y values.}
+             \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{+} \PYZbs{}
+                 \PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{*} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{} Compute the residuals.}
+             \PY{n}{res} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}
+             \PY{c+c1}{\PYZsh{} Compute the sum of squared residuals.}
+             \PY{n}{s} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{res}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Return the SSres}
+             \PY{k}{return} \PY{n}{s}
+\end{Verbatim}
+
+
+    Now we can use SciPy's \texttt{minimize} function to fit out model to
+the data:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kn}{from} \PY{n+nn}{scipy.optimize} \PY{k+kn}{import} \PY{n}{minimize}
+         
+         \PY{c+c1}{\PYZsh{} Set an initial guess for the betas.}
+         \PY{n}{initial\PYZus{}guess} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Fit the model.}
+         \PY{n}{model} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{n}{initial\PYZus{}guess}\PY{p}{,} \PYZbs{}
+             \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{predictors}\PY{p}{,} \PY{n}{tay\PYZus{}minutes}\PY{p}{)}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L\PYZhy{}BFGS\PYZhy{}B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Report the betas.}
+         \PY{n}{betas} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{x}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best fit: b0=\PYZob{}\PYZcb{}, b1=\PYZob{}\PYZcb{}, b2=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best fit: b0=34.19, b1=0.16, b2=1.88
+
+    \end{Verbatim}
+
+    OK! So the best fit is the following:
+
+\(Swifting = 34.19 + happiness * 1.88 + IQ * 0.16 + \epsilon\)
+
+Our \(\beta\) values are 1.88 for happiness and 0.16 for IQ. Does that
+mean IQ is less important than happiness for determining Taylor Swift
+listening? It doesn't necessarily, because we're currently looking at
+\emph{unstandardised coefficients}. The values for IQ are larger than
+the values for happiness: IQ, per definition, has a mean of 100 and a
+standard deviation of 15, whereas happiness was rated on a 0-10 scale.
+This difference in range alters the magnitudes of \(\beta\) values.
+
+In order to directly compare the parameters, we'll need the
+\emph{standardised coefficients}. You can compute those by simply
+z-scoring predictors (and outcomes!) \textbf{before} running your
+regression:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{from} \PY{n+nn}{scipy.stats} \PY{k+kn}{import} \PY{n}{zscore}
+         \PY{k+kn}{from} \PY{n+nn}{scipy.optimize} \PY{k+kn}{import} \PY{n}{minimize}
+         
+         \PY{c+c1}{\PYZsh{} Use the two predictors together into a single variable.}
+         \PY{n}{z\PYZus{}predictors} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{zscore}\PY{p}{(}\PY{n}{iq}\PY{p}{)}\PY{p}{,} \PY{n}{zscore}\PY{p}{(}\PY{n}{happy}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{z\PYZus{}minutes} \PY{o}{=} \PY{n}{zscore}\PY{p}{(}\PY{n}{tay\PYZus{}minutes}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Set an initial guess for the betas.}
+         \PY{n}{initial\PYZus{}guess} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Fit the model.}
+         \PY{n}{stand\PYZus{}model} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{n}{initial\PYZus{}guess}\PY{p}{,} \PYZbs{}
+             \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{z\PYZus{}predictors}\PY{p}{,} \PY{n}{z\PYZus{}minutes}\PY{p}{)}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L\PYZhy{}BFGS\PYZhy{}B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Report the betas.}
+         \PY{n}{stand\PYZus{}betas} \PY{o}{=} \PY{n}{stand\PYZus{}model}\PY{o}{.}\PY{n}{x}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best fit: b0=\PYZob{}\PYZcb{}, b1=\PYZob{}\PYZcb{}, b2=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{stand\PYZus{}betas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{stand\PYZus{}betas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{stand\PYZus{}betas}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best fit: b0=0.0, b1=0.13, b2=0.3
+
+    \end{Verbatim}
+
+    From this, we can really tell that happiness has a bigger effect on
+Taylor Swift listening than IQ does.
+
+Let's compute how much of the variance we can explain with the current
+fit:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Compute the predicted y values based on the fitted betas.}
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{iq} \PY{o}{+} \PY{n}{betas}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{*} \PY{n}{happy}
+         
+         \PY{c+c1}{\PYZsh{} Compute the residual sum of squares.}
+         \PY{n}{ss\PYZus{}res} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{tay\PYZus{}minutes} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Compute the total sum of squares.}
+         \PY{n}{ss\PYZus{}tot} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{tay\PYZus{}minutes} \PY{o}{\PYZhy{}} \PY{n}{numpy}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{tay\PYZus{}minutes}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Compute R square.}
+         \PY{n}{r\PYZus{}sq} \PY{o}{=} \PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{ss\PYZus{}res} \PY{o}{/} \PY{n}{ss\PYZus{}tot}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R squared = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{r\PYZus{}sq}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+R squared = 0.11
+
+    \end{Verbatim}
+
+    An \(R^{2}\) of 0.11 is pretty decent!
+
+Or is it? We don't really know what it means in context, or whether it's
+statistically significant. Let's shelf that thought for a second, as we
+will return to it later.
+
+    \subsection{Step-wise regression}\label{step-wise-regression}
+
+Up until now, you have been using all predictors at the same time,
+without regard for whether they interact or not. One alternative to
+this, is to use \emph{step-wise regression}. Here, you use one predictor
+at a time, and continue with the residuals after each predictor. This
+allows you to compute the relationship between two variables after
+accounting for another.
+
+For example, let's regress out the effect of IQ on Taylor Swift
+listening first:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{import} \PY{n+nn}{numpy}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{pyplot}
+         \PY{k+kn}{from} \PY{n+nn}{scipy.stats} \PY{k+kn}{import} \PY{n}{linregress}
+         
+         \PY{c+c1}{\PYZsh{} Load the data.}
+         \PY{n}{data} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{taytay\PYZus{}revisited.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{,} \PYZbs{}
+             \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Create some easy variable names to point to the data.}
+         \PY{n}{tay\PYZus{}minutes} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{happy} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{iq} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Compute the slope and intercept for the regression of IQ }
+         \PY{c+c1}{\PYZsh{} on Taylor Swift minutes.}
+         \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{r}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{std\PYZus{}err} \PY{o}{=} \PY{n}{linregress}\PY{p}{(}\PY{n}{iq}\PY{p}{,} \PY{n}{tay\PYZus{}minutes}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IQ: R squared=\PYZob{}\PYZcb{}, p=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(} \PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{r}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Predict tay\PYZus{}minutes based on the regression.}
+         \PY{n}{y\PYZus{}pred\PYZus{}iq} \PY{o}{=} \PY{n}{intercept} \PY{o}{+} \PY{n}{slope} \PY{o}{*} \PY{n}{iq}
+         
+         \PY{c+c1}{\PYZsh{} Compute the residuals.}
+         \PY{n}{residual\PYZus{}minutes} \PY{o}{=} \PY{n}{tay\PYZus{}minutes} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred\PYZus{}iq}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+IQ: R squared=0.01, p=0.0
+
+    \end{Verbatim}
+
+    We now have the residual minutes of Taylor Swift listening after
+accounting for the linear effect of IQ. Let's see if happiness predicts
+this residual score:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} Compute the slope and intercept for the regression }
+         \PY{c+c1}{\PYZsh{} of IQ on Taylor Swift minutes.}
+         \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{r}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{std\PYZus{}err} \PY{o}{=} \PYZbs{}
+             \PY{n}{linregress}\PY{p}{(}\PY{n}{happy}\PY{p}{,} \PY{n}{residual\PYZus{}minutes}\PY{p}{)}
+         
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happy: R squared=\PYZob{}\PYZcb{}, p=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PYZbs{}
+             \PY{n+nb}{round}\PY{p}{(}\PY{n}{r}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Predict tay\PYZus{}minutes based on the regression.}
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{intercept} \PY{o}{+} \PY{n}{slope} \PY{o}{*} \PY{n}{happy}
+         
+         \PY{c+c1}{\PYZsh{} Compute the residuals.}
+         \PY{n}{residuals} \PY{o}{=} \PY{n}{residual\PYZus{}minutes} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Happy: R squared=0.09, p=0.0
+
+    \end{Verbatim}
+
+    The effect is roughly equal to what it was before (which you would only
+know if you had computed each individual variable's explained variance,
+btw). Also note that no additional variance is explained in a stepwise
+compared to the earlier multivariable regression.
+
+In this dataset, IQ and happiness don't share much (or any) variance.
+When predictors are correlated between each other, regressions become
+harder to do.
+
+Stepwise regression can be useful when you have a list of predictors,
+ordered from high to low priority according to your own theory. It can
+also be useful if you're aiming to regress out the effect of one
+predictor to assess whether a second predictor can predict any unique
+variance beyond the first predictor. This is particularly important when
+those two predictors are correlated.
+
+One example to illustrate the above: Let's say you're interested in the
+effect of potential reward on saccadic peak velocity. Or: Do people make
+faster eye movements when you offer them a higher reward for doing so?
+We know that saccadic amplitude is strongly related to peak velocity.
+Thus, people could (implicitly) have learned to make larger eye
+movements to increase their peak velocity. Hence, if you care about the
+effect of reward on peak velocity, you will need to regress out the
+effect of saccadic amplitude first. If reward can predict some of the
+variance in the residuals after accounting for saccadic amplitude, it
+means that reward had a unique effect on peak velocity.
+
+    \section{Model fitting}\label{model-fitting}
+
+So we just learned about linear regression and least-squares estimation.
+We can extend this topic is extended into more general \emph{model
+fitting}. We will be thinking about scientific hypotheses as
+\emph{models}, which are precise descriptions of relationships between
+variables. For example, according to Newton's second law of motion, the
+relationship between an object's force, mass, and acceleration is given
+by the equation \(F = ma\)
+
+Models do not have to be linear, but can take all shapes and sizes. The
+examples we'll look at today will include an exponential function, and a
+probability density function that is a mixture of typical distributions.
+
+In Experimental Psychology, entirely descriptive box-and-arrow drawings
+are often mistaken for models. Although they might be useful for
+describing phenomena, it can be argued that they lack predictive power.
+Here, we'll go by a more narrow definition, and only use the word
+\emph{model} for hypotheses that are testable and precise.
+
+    \subsection{Fitting a non-linear model with one free
+parameter}\label{fitting-a-non-linear-model-with-one-free-parameter}
+
+The first example today is in the field of short-term memory. Storing
+visual information in short-term memory requires that stimuli in the
+environment are processed into an internal representation, and that this
+representation is maintained temporarily (typically for up to a few
+seconds). In the past, researchers have wondered whether human's faced
+storage capacity limits for visual information. In addition, they
+wondered whether there are limitations on the processing capacity. In
+other words, researchers wanted to know whether there was a maximum
+limit on the amount of information a person can have in short-term
+memory, and whether there is a maximum bandwith available for encoding
+information into short-term memory.
+
+One experiment used in the 1980s and 1990s is the \emph{whole report}
+paradigm. In this type of experiment, participants are presented with a
+number of visual stimuli. For example, they could be presented with 8
+different letters. The researcher would control how long the letters
+were visible before they were masked (replaced by a neutral stimulus).
+In this way, the researcher could control exactly how long participants
+could process the presented stimuli.
+
+What is measured in whole report experiments is how many of the stimuli
+participants could remember. At lower exposure durations, one would
+expect fewer stimuli to be processed, especially if humans have a
+limited processing capacity. In addition, if human short-term memory is
+of a limited storage capacity, one expects that subjects would struggle
+to recall all stimuli even under very long exposure durations.
+
+More precisely, one would expect that the number of recalled stimuli
+rises as a function of the exposure duration (the slope determined by
+processing capacity), but that this rise is limited by an asymptote
+(storage capacity).
+
+Let's define the things we just said a bit more precisely. If the
+processing capacity (let's call it \(C\)) is limited, it should be
+divided among the number of stimuli that a participant is trying to
+recall (let's call that number \(T\)). So our capacity per stimulus is:
+
+\({{C} \over {T}}\)
+
+To find how much of a stimulus was encoded, we need to multiply the
+processing capacity by the time that a participant was processing a
+stimulus (let's call that \(\tau\)):
+
+\({{C \tau} \over {T}}\)
+
+This can be used to describe the \emph{probability of a stimulus
+finishing processing} (let's call that \(s\)). The following equation
+does just that:
+
+\(s = 1 - \exp{({{-C \tau} \over {T}})}\)
+
+Note that, if there was no limit on processing capacity, we wouldn't
+have to divide the total capacity by the number of stimuli. Which would
+look like this:
+
+\(s = 1 - \exp{(-C \tau)}\)
+
+For now, let's assume there were fewer stimuli than participants could
+remember. In that case, the storage capacity wouldn't matter. The number
+of recalled stimuli (let's call it \(E(score)\)) could thus be computed
+by simply multiplying the probability that any one stimulus finishes
+encoding (\(s\)) by the number of stimuli (\(T\)):
+
+\(E(score) = Ts\)
+
+OK, let's recap: We have two models. In the first model, the limited
+processing capacity has to be divided over all stimuli. In the second
+model, the processing capacity does not have to be divided at all. The
+equations for these two models look like this:
+
+\(E(score)_{1} = T (1 - \exp{({{-C \tau} \over {T}})})\)
+
+\(E(score)_{2} = T (1 - \exp{(-C \tau)})\)
+
+Note that we know \(T\), as this is the number of stimuli in our
+experiment. We also know \(\tau\), as this is the time participants were
+given to encode the stimuli.
+
+In an experiment, participants were always shown 3 stimuli. These
+stimuli were letters that participants were asked to type in after a
+brief delay. In each trial, stimuli were presented with a different
+exposure duration (time between the onset of the stimuli and the onset
+of the mask). These exposure durations could be 10, 20, 40, 80, 160, 320
+milliseconds.
+
+The average number of stimuli that each participant could recall after
+each exposure duration has already been computed for you. You can find
+these data in the attached file \texttt{whole\_report.csv}. Load it
+using NumPy's \texttt{loadtxt} function:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy}
+        
+        \PY{c+c1}{\PYZsh{} Load the data from the data file.}
+        \PY{n}{data} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{whole\PYZus{}report.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{,} \PYZbs{}
+            \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{unpack}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Create a variable that codes the number of}
+        \PY{c+c1}{\PYZsh{} stimuli used in each trial of this experiment.}
+        \PY{n}{n\PYZus{}stimuli} \PY{o}{=} \PY{l+m+mi}{3}
+        
+        \PY{c+c1}{\PYZsh{} Create a vector with all exposure durations from}
+        \PY{c+c1}{\PYZsh{} the experiment.}
+        \PY{n}{expdur} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{l+m+mf}{0.02}\PY{p}{,}\PY{l+m+mf}{0.04}\PY{p}{,}\PY{l+m+mf}{0.08}\PY{p}{,}\PY{l+m+mf}{0.16}\PY{p}{,}\PY{l+m+mf}{0.32}\PY{p}{]}\PY{p}{,} \PYZbs{}
+            \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Convenience renaming of columns in the data file.}
+        \PY{c+c1}{\PYZsh{} We won\PYZsq{}t actually use this, it\PYZsq{}s more to show you}
+        \PY{c+c1}{\PYZsh{} what is in the file if you didn\PYZsq{}t open it outside}
+        \PY{c+c1}{\PYZsh{} of this workbook.}
+        \PY{n}{score\PYZus{}10ms} \PY{o}{=}  \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{score\PYZus{}20ms} \PY{o}{=}  \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{score\PYZus{}40ms} \PY{o}{=}  \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{score\PYZus{}80ms} \PY{o}{=}  \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{score\PYZus{}160ms} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{score\PYZus{}320ms} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    Now that we have the data, let's visualise it to have a look:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{pyplot}
+        
+        \PY{c+c1}{\PYZsh{} Count the number of participants.}
+        \PY{n}{n\PYZus{}participants} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Loop through all participants, and plot the data for each.}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}participants}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Plot the exposure duration on the x\PYZhy{}axis, and the}
+            \PY{c+c1}{\PYZsh{} average score for the current participant on the}
+            \PY{c+c1}{\PYZsh{} y\PYZhy{}axis.}
+            \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{expdur}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Add axis labels to the plot.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Exposure duration (seconds)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average number of recalled stimuli}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} Text(0,0.5,u'Average number of recalled stimuli')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Having all participants in one plot is a bit messy. Let's compute the
+average, and plot that instead.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Compute the average score across all participants.}
+        \PY{n}{m} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Compute the standard deviation.}
+        \PY{n}{sd} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ddof}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Compute the standard error of the mean.}
+        \PY{n}{sem} \PY{o}{=} \PY{n}{sd} \PY{o}{/} \PY{n}{numpy}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{n\PYZus{}participants}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the average and the standard error of the mean.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}FF69B4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{fill\PYZus{}between}\PY{p}{(}\PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{o}{\PYZhy{}}\PY{n}{sem}\PY{p}{,} \PY{n}{m}\PY{o}{+}\PY{n}{sem}\PY{p}{,} \PYZbs{}
+            \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}FF69B4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Add axis labels to the plot.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Exposure duration (seconds)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average number of recalled stimuli}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} Text(0,0.5,u'Average number of recalled stimuli')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now that you have had a look at the data, it's time to start fitting the
+models. You would typically do this for every participant, but for now
+let's practice on the mean instead.
+
+Fitting models to data works in much the same way as linear regression.
+First, you define a function to compute the residuals for each model:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Model 1 was for a limited processing capacity.}
+        \PY{k}{def} \PY{n+nf}{model\PYZus{}1}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} The predicted y values based on model 1:}
+            \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{T} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{numpy}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{parameters}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{x}\PY{p}{)} \PY{o}{/} \PY{n}{T}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{y\PYZus{}pred}
+        
+        \PY{c+c1}{\PYZsh{} Model 2 was for an unlimited processing capacity.}
+        \PY{k}{def} \PY{n+nf}{model\PYZus{}2}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} The predicted y values based on model 2:}
+            \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{T} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{numpy}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{parameters}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{y\PYZus{}pred}
+        
+        \PY{k}{def} \PY{n+nf}{residuals}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{model\PYZus{}nr}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Compute the predicted y values based on a model.}
+            \PY{k}{if} \PY{n}{model\PYZus{}nr} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{model\PYZus{}1}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+            \PY{k}{elif} \PY{n}{model\PYZus{}nr} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{model\PYZus{}2}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Compute the difference between the measured outcome}
+            \PY{c+c1}{\PYZsh{} and the predicted outcome (the residuals).}
+            \PY{n}{res} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}
+            \PY{c+c1}{\PYZsh{} Compute the sum of squared residuals.}
+            \PY{n}{s} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{res}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Return the squared residuals.}
+            \PY{k}{return} \PY{n}{s}
+\end{Verbatim}
+
+
+    Now that you've defined the models, you can find the best fitting
+parameters using a minimisation algorithm:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{from} \PY{n+nn}{scipy.optimize} \PY{k+kn}{import} \PY{n}{minimize}
+        
+        \PY{c+c1}{\PYZsh{} Go through all models.}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{model} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{n}{model\PYZus{}1}\PY{p}{,} \PY{n}{model\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Fit the current model.}
+            \PY{n}{outcome} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                \PY{n}{method}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L\PYZhy{}BFGS\PYZhy{}B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{bounds}\PY{o}{=}\PY{p}{[}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Get the best parameters for the best fit.}
+            \PY{n}{C} \PY{o}{=} \PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} Compute the residual sum of squares.}
+            \PY{n}{ss\PYZus{}res} \PY{o}{=} \PY{n}{residuals}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PYZbs{}
+                \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model \PYZob{}\PYZcb{}: C=\PYZob{}\PYZcb{}, SSres=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(} \PYZbs{}
+                \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{C}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{ss\PYZus{}res}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Compute the predicted outcome values.}
+            \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Plot the predicted outcome.}
+            \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{expdur}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the average.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}000000}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Add axis labels to the plot.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Exposure duration (seconds)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average number of recalled stimuli}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model 1: C=29.06, SSres=0.43
+Model 2: C=9.69, SSres=0.43
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Text(0,0.5,u'Average number of recalled stimuli')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From this plot, which model would you say fits best?
+
+Why, from a mathematical perspective, do you think the two models fit
+equally well? (Think about the relationship between parameters.)
+
+    \subsection{Fitting a model with two free
+parameters}\label{fitting-a-model-with-two-free-parameters}
+
+Did you notice how at exposure durations of 10 milliseconds,
+participants tend not to recall any stimuli? Perhaps our assumption that
+participants can use the full exposure duration to process information
+does not hold true. Maybe participants need a bit of initial time to
+visually process the stimuli before they can start encoding them into
+short-term memory?
+
+This is an interesting suggestion, and one that can be written down as
+an equation. Recall our first model? It assumed that the processing time
+\(\tau\) was the entire exposure duration (let's call that \(t\)).
+
+\(E(score)_{1} = T (1 - \exp{({{-C \tau} \over {T}})})\)
+
+\emph{where \(\tau = t\)}
+
+But perhaps there is a \emph{minimally effective exposure duration},
+i.e. a brief period during which no encoding into short-term memory
+occurs yet. Let's call that \(t_{0}\). This value needs to be subtracted
+from the total exposure duration \(t\):
+
+\(\tau = t - t_{0}\)
+
+This means that our first model could be written like this:
+
+\(E(score)_{1} = T (1 - \exp{({{-C t} \over {T}})})\)
+
+And a version that does incorporate the minimally effective exposure
+duration could be written like this:
+
+\(E(score)_{3} = T (1 - \exp{({{-C (t - t_{0})} \over {T}})})\)
+
+We can also incorporate this in the models that did not have a limited
+processing capacity:
+
+\(E(score)_{2} = T (1 - \exp{(-C t)})\)
+
+\(E(score)_{4} = T (1 - \exp{(-C (t - t_{0}))})\)
+
+We should create functions for these new models too:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Model 1 was for a limited processing capacity.}
+        \PY{k}{def} \PY{n+nf}{model\PYZus{}3}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} The predicted y values based on model 3:}
+            \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{T} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{numpy}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{parameters}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PYZbs{}
+                \PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{parameters}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{T}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{y\PYZus{}pred}
+        
+        \PY{c+c1}{\PYZsh{} Model 2 was for an unlimited processing capacity.}
+        \PY{k}{def} \PY{n+nf}{model\PYZus{}4}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} The predicted y values based on model 4:}
+            \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{T} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{numpy}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{parameters}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PYZbs{}
+                \PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{parameters}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{y\PYZus{}pred}
+        
+        \PY{k}{def} \PY{n+nf}{residuals}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{model\PYZus{}nr}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Compute the predicted y values based on a model.}
+            \PY{k}{if} \PY{n}{model\PYZus{}nr} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{model\PYZus{}1}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+            \PY{k}{elif} \PY{n}{model\PYZus{}nr} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{model\PYZus{}2}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+            \PY{k}{elif} \PY{n}{model\PYZus{}nr} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{:}
+                \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{model\PYZus{}3}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+            \PY{k}{elif} \PY{n}{model\PYZus{}nr} \PY{o}{==} \PY{l+m+mi}{4}\PY{p}{:}
+                \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{model\PYZus{}4}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Compute the difference between the measured outcome}
+            \PY{c+c1}{\PYZsh{} and the predicted outcome (the residuals).}
+            \PY{n}{res} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}pred}
+            \PY{c+c1}{\PYZsh{} Compute the sum of squared residuals.}
+            \PY{n}{s} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{res}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Return the squared residuals.}
+            \PY{k}{return} \PY{n}{s}
+\end{Verbatim}
+
+
+    Now let's fit ALL the models!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{from} \PY{n+nn}{scipy.optimize} \PY{k+kn}{import} \PY{n}{minimize}
+        
+        \PY{c+c1}{\PYZsh{} Go through all models.}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{model} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{n}{model\PYZus{}1}\PY{p}{,} \PY{n}{model\PYZus{}2}\PY{p}{,} \PY{n}{model\PYZus{}3}\PY{p}{,} \PY{n}{model\PYZus{}4}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Fit the current model.}
+            \PY{n}{outcome} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                \PY{n}{method}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L\PYZhy{}BFGS\PYZhy{}B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{bounds}\PY{o}{=}\PY{p}{[}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Get the best parameters for the best fit.}
+            \PY{n}{C} \PY{o}{=} \PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{t0} \PY{o}{=} \PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} Compute the residual sum of squares.}
+            \PY{n}{ss\PYZus{}res} \PY{o}{=} \PY{n}{residuals}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PYZbs{}
+                \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model \PYZob{}\PYZcb{}: C=\PYZob{}\PYZcb{}, SSres=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(} \PYZbs{}
+                \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{C}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{ss\PYZus{}res}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Compute the predicted outcome values.}
+            \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Plot the predicted outcome.}
+            \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{expdur}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the average.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}000000}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Add axis labels to the plot.}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Exposure duration (seconds)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average number of recalled stimuli}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model 1: C=29.06, SSres=0.43
+Model 2: C=9.69, SSres=0.43
+Model 3: C=38.61, SSres=0.08
+Model 4: C=12.87, SSres=0.08
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} Text(0,0.5,u'Average number of recalled stimuli')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_73_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Which of our models do you think fits best now?
+
+    \emph{Mind you, this is still a very narrow model: It just describes
+behaviour in a single task (although it was derived within a wider
+computational framework). In addition, there is a way to incorporate a
+storage capacity for short-term memory (which we have ignored here). For
+more info, you can read the following paper:}
+
+\begin{itemize}
+\tightlist
+\item
+  Budesen, C. (1990). A theory of visual attention. \emph{Psychological
+  Review}, \emph{97}(4), 523-547.
+  doi:\href{http://dx.doi.org/10.1037/0033-295X.97.4.523}{10.1037/0033-295X.97.4.523}
+\end{itemize}
+
+    \subsection{Model comparison}\label{model-comparison}
+
+One way to compare the models introduced above, is by measuring how much
+variance each explains. The logic behind this is that a better model
+should explain more variance. You could compute the coefficient of
+determination for each model, using the same equation that you used in
+linear regression last week:
+
+\(R^{2} = 1 - { { \Sigma^{n}_{i=1} (y_{i} - f_{i})^{2} } \over { \Sigma^{n}_{i=1}(y_{i} - \bar{y})^{2} }}\)
+
+Where \(y\) is the measured outcome (correctly recalled number of
+stimuli) for each participant \(i\), and \(f\) is the predicted number
+of stimuli for each participant.
+
+Let's run the numbers:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Go through all models.}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{model} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{n}{model\PYZus{}1}\PY{p}{,} \PY{n}{model\PYZus{}2}\PY{p}{,} \PY{n}{model\PYZus{}3}\PY{p}{,} \PY{n}{model\PYZus{}4}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Fit the current model.}
+            \PY{n}{outcome} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                \PY{n}{method}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L\PYZhy{}BFGS\PYZhy{}B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Get the best parameters for the best fit.}
+            \PY{n}{C} \PY{o}{=} \PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} Compute the residual sum of squares.}
+            \PY{n}{ss\PYZus{}res} \PY{o}{=} \PY{n}{residuals}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PYZbs{}
+                \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Compute the total sum of squares.}
+            \PY{n}{ss\PYZus{}tot} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{m} \PY{o}{\PYZhy{}} \PY{n}{numpy}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Compute the coefficient of determination.}
+            \PY{n}{r\PYZus{}sq} \PY{o}{=} \PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{ss\PYZus{}res} \PY{o}{/} \PY{n}{ss\PYZus{}tot}\PY{p}{)}
+        
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model \PYZob{}\PYZcb{}: R squared = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(} \PYZbs{}
+                \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{r\PYZus{}sq}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model 1: R squared = 0.947
+Model 2: R squared = 0.947
+Model 3: R squared = 0.991
+Model 4: R squared = 0.991
+
+    \end{Verbatim}
+
+    \paragraph{Introducing the Bayesian Information
+Criterion}\label{introducing-the-bayesian-information-criterion}
+
+One downside of using \(R^{2}\) is that it doesn't distinguish between
+models that have very few free parameters, and models that have very
+many. As a rule, the more free parameters in a model, the easier it is
+to fit it to some data. This is not a feature of how good your model is,
+but rather of how flexible it is.
+
+To counteract this, we can turn to ways in which we can quantify the
+\emph{goodness of fit}. One of these metrics is the \emph{adjusted R
+squared}, which is computed from the \(R^{2}\), the number of
+observations (\(n\)), and the number of free parameters (\(k\)):
+
+\(R^{2}_{adjusted} = 1 - {{(1 - R^{2}) (n - 1)} \over {n - k - 1}}\)
+
+Another measure for the goodness of fit is the \emph{Bayesian
+Information Criterion} (BIC). One way of computing the BIC directly uses
+the residuals:
+
+\(BIC = n + n \ln{(2 \pi)} + n \ln{({{SS_{res}} \over {n}})} + \ln{(n)}(k + 1)\)
+
+\emph{where \(n\) is the number of observations (in this case: number of
+exposure durations), and \(k\) is the number free parameters in a model}
+
+Both of these metrics do not only quantify how good a fit is, but also
+punish models as a function of how many parameters they require.
+
+Let's use the BIC to compare our models one last time:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Go through all models.}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{model} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{n}{model\PYZus{}1}\PY{p}{,} \PY{n}{model\PYZus{}2}\PY{p}{,} \PY{n}{model\PYZus{}3}\PY{p}{,} \PY{n}{model\PYZus{}4}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Fit the current model.}
+             \PY{n}{outcome} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                 \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                 \PY{n}{method}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L\PYZhy{}BFGS\PYZhy{}B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Get the best parameters for the best fit.}
+             \PY{n}{C} \PY{o}{=} \PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{} Compute the residual sum of squares.}
+             \PY{n}{ss\PYZus{}res} \PY{o}{=} \PY{n}{residuals}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PYZbs{}
+                 \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Compute the total sum of squares.}
+             \PY{n}{ss\PYZus{}tot} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{m} \PY{o}{\PYZhy{}} \PY{n}{numpy}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Compute the coefficient of determination.}
+             \PY{n}{r\PYZus{}sq} \PY{o}{=} \PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{ss\PYZus{}res} \PY{o}{/} \PY{n}{ss\PYZus{}tot}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Count the number of observations.}
+             \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{expdur}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Set the number of free parameters.}
+             \PY{k}{if} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} The first two models have one free }
+                 \PY{c+c1}{\PYZsh{} parameter: C}
+                 \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{elif} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} The second two models have two free}
+                 \PY{c+c1}{\PYZsh{} parameters: C and t0}
+                 \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{2}
+             \PY{c+c1}{\PYZsh{} Compute the Bayesian Information Criterion.}
+             \PY{n}{bic} \PY{o}{=} \PY{n}{n} \PY{o}{+} \PY{n}{n}\PY{o}{*}\PY{n}{numpy}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{numpy}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{+} \PYZbs{}
+                 \PY{n}{n}\PY{o}{*}\PY{n}{numpy}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{ss\PYZus{}res}\PY{o}{/}\PY{n}{n}\PY{p}{)} \PY{o}{+} \PYZbs{}
+                 \PY{n}{numpy}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+         
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model \PYZob{}\PYZcb{}: BIC = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(} \PYZbs{}
+                 \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{bic}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model 1: BIC = 4.82
+Model 2: BIC = 4.82
+Model 3: BIC = -3.81
+Model 4: BIC = -3.81
+
+    \end{Verbatim}
+
+    Choosing which model fits best is done by comparison of BICs. By
+convention, you choose the lowest BIC. This is the best fitting model.
+You then compute the differences between that BIC and the other models'
+BICs. The resulting values, \({\Delta}BIC\), are usually interpreted
+using the guidelines of Raftery (1995), who considers \({\Delta}BIC\)
+values of 2-6 positive evidence in favour of the best fitting model,
+values of 6-10 as strong evidence, and values over 10 as very stong
+evidence.
+
+    Note that normally, you would fit a model to each participant, not to
+the average of the whole sample. You can then compute a \(BIC\) for each
+participant. The sum across all participants of the \(BIC\) values for a
+model is them compared against the other models' sums.
+
+Such a procedure would look like this in code:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Go through models 1 and 3.}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Get the model function for this model.}
+             \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{model} \PY{o}{=} \PY{n}{model\PYZus{}1}
+             \PY{k}{elif} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                 \PY{n}{model} \PY{o}{=} \PY{n}{model\PYZus{}3}
+         
+             \PY{c+c1}{\PYZsh{} Count the number of participants.}
+             \PY{n}{n\PYZus{}participants} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} Maintain a list of BIC values for}
+             \PY{c+c1}{\PYZsh{} all participants.}
+             \PY{n}{bic} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n\PYZus{}participants}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Go through all participants.}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}participants}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} Fit the current model.}
+                 \PY{n}{outcome} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PYZbs{}
+                     \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                     \PY{n}{method}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L\PYZhy{}BFGS\PYZhy{}B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Get the best parameters for the best fit.}
+                 \PY{n}{C} \PY{o}{=} \PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{t0} \PY{o}{=} \PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+                 \PY{c+c1}{\PYZsh{} Compute the residual sum of squares.}
+                 \PY{n}{ss\PYZus{}res} \PY{o}{=} \PY{n}{residuals}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{n\PYZus{}stimuli}\PY{p}{,} \PYZbs{}
+                     \PY{n}{expdur}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Compute the total sum of squares.}
+                 \PY{n}{ss\PYZus{}tot} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{m} \PY{o}{\PYZhy{}} \PY{n}{numpy}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Compute the coefficient of determination.}
+                 \PY{n}{r\PYZus{}sq} \PY{o}{=} \PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{ss\PYZus{}res} \PY{o}{/} \PY{n}{ss\PYZus{}tot}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Count the number of observations.}
+                 \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{expdur}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Set the number of free parameters.}
+                 \PY{k}{if} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} The first two models have one free }
+                     \PY{c+c1}{\PYZsh{} parameter: C}
+                     \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{k}{elif} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} The second two models have two free}
+                     \PY{c+c1}{\PYZsh{} parameters: C and t0}
+                     \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{2}
+                 \PY{c+c1}{\PYZsh{} Compute the Bayesian Information Criterion.}
+                 \PY{n}{bic}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{n} \PY{o}{+} \PY{n}{n}\PY{o}{*}\PY{n}{numpy}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{numpy}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{+} \PYZbs{}
+                     \PY{n}{n}\PY{o}{*}\PY{n}{numpy}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{ss\PYZus{}res}\PY{o}{/}\PY{n}{n}\PY{p}{)} \PY{o}{+} \PYZbs{}
+                     \PY{n}{numpy}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+         
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model \PYZob{}\PYZcb{}: BIC sum = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(} \PYZbs{}
+                 \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{numpy}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{bic}\PY{p}{)}\PY{p}{,} \PY{n}{ndigits}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model 1: BIC sum = 241.126
+Model 3: BIC sum = -190.651
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
